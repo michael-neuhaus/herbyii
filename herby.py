@@ -26,6 +26,10 @@ import csv
 
 import json
 
+from datetime import datetime
+
+import time
+
 #seperate sensor functions to read and process values, to be called in main
   
 #tds and moisture       
@@ -81,7 +85,7 @@ def write_json(new_data, filename="sample.json"):
         file_data = json.load(file)
         file_data["herby_details"].append(new_data)
         file.seek(0)
-        json.dump(file_data, file, indent =4)
+        json.dump(file_data, file, indent =6)
         
 #main functions calls all sensor functions and writes values in csv file 
 def main():
@@ -91,15 +95,17 @@ def main():
         "herby_details": [
         ]
     }
-    json_herby_ini = json.dumps(jsonInitializeData, indent = 4)
+    json_herby_ini = json.dumps(jsonInitializeData, indent = 6)
     with open("sample.json","w") as outfile:
         outfile.write(json_herby_ini)
         
     while True:
         
         time.sleep(5)
-        i= 4
-        i= i+4
+        currentDate = date.today()
+        today = currentDate.strftime('%m/%d/%y')
+        t = time.localtime()
+        current_time = time.strftime("%H:%M:%S", t)
 
         #call all sensors
         mois,tds = moisture_tds_main()
@@ -111,6 +117,8 @@ def main():
             "light" : light,
             "temp" : temp,
             "humi" : humi,
+            "date" : today,
+            "time" : current_time,
         }
         
         write_json(data)
@@ -131,9 +139,7 @@ def main():
         
         
         #get current date in correct format and write all sensor values in file with according date
-        currentDate = date.today()
-        today = currentDate.strftime('%m/%d/%y')
-        toWrite = [mois, light, temp]
+        
         #write_json(toWriteJson)
         #create data frame 
         # df = pd.read_csv('test.csv')
