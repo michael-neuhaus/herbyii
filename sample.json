@@ -23,6 +23,12 @@
             "light": 477,
             "temp": 0.0,
             "humi": 0.0
+        },
+        {
+            "moisture": 1714,
+            "light": 475,
+            "temp": 0.0,
+            "humi": 0.0
         }
     ]
 }
