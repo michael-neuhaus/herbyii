@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>herby</title>
+      <link rel="stylesheet" href="style.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    </head>
+    <body>
+
+      <div id="logo">
+        <img src="logo.png">
+      </div>
+
+      <div id="panel">
+        <div id="temperature" class="value-tile">
+          <p class="tile-title">temperature</p>
+          <p class="tile-value">16&#8451;</p>
+        </div>
+        <div id="moisture" class="value-tile">
+          <p class="tile-title">moisture</p>
+          <p class="tile-value">101</p>
+        </div>
+        <div id="light" class="value-tile">
+          <p class="tile-title">light</p>
+          <p class="tile-value">101</p>
+        </div>
+        <div id="TDS" class="value-tile">
+          <p class="tile-title">TDS</p>
+          <p class="tile-value">101</p>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="chart-container">
+          <canvas id="temperature-chart"></canvas>
+          <script src="app.js"></script>
+        </div>
+
+        <!-- <p class="value">27&#8451;</p> -->
+  
+        <div class="chart-container">
+          <canvas id="moisture-chart"></canvas>
+          <script src="app.js"></script>
+        </div>
+  
+        <div class="chart-container">
+          <canvas id="light-chart"></canvas>
+          <script src="app.js"></script>
+        </div>
+  
+        <div class="chart-container">
+          <canvas id="TDS-chart"></canvas>
+          <script src="app.js"></script>
+        </div>
+      </div>
+
+    </body>
+    </html

@@ -1,0 +1,22 @@
+{
+	"sensor-data": [
+	{
+		"year":2022,
+		"month":6,
+		"day":13,
+		"light":100,
+		"temperature":25,
+		"moisture":100,
+		"TDS":100
+	 },
+	 {
+		"year":2022,
+		"month":6,
+		"day":14,
+		"light":99,
+		"temperature":23,
+		"moisture":100,
+		"TDS":11
+	 }
+	]
+}
