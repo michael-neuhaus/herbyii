@@ -53,6 +53,12 @@
             "light": 481,
             "temp": 0.0,
             "humi": 0.0
+        },
+        {
+            "moisture": 1718,
+            "light": 478,
+            "temp": 0.0,
+            "humi": 0.0
         }
     ]
 }
