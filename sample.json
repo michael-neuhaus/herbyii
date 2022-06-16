@@ -5,6 +5,12 @@
             "light": 479,
             "temp": 0.0,
             "humi": 0.0
+        },
+        {
+            "moisture": 1716,
+            "light": 477,
+            "temp": 0.0,
+            "humi": 0.0
         }
     ]
 }
