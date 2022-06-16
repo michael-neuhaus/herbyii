@@ -1,3 +1,9 @@
 {
-      "herby_details": []
-}
+      "herby_details": [
+            {
+                  "moisture": 1709,
+                  "light": 479,
+                  "temp": 0.0,
+                  "humi": 0.0,
+                  "date": "06/16/22",
+                  "time": 
