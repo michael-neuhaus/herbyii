@@ -20,7 +20,7 @@ img {
     /* border: 1px solid;
     border-radius: 5px;
     border-color: #259932; */
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 
 }
 
@@ -43,9 +43,16 @@ img {
     font-size: 33px;
 }
 
+#timestamp {
+    text-align: center;
+    margin-top: 25px;
+    
+}
+
 .content {
     width: 66%;
-    margin: auto;  
+    margin: auto;
+    margin-top: 100px;  
 }
 
 .chart-container {
