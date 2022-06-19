@@ -4,41 +4,38 @@ from upm import pyupm_buzzer as upmBuzzer
 # import pandas as pd
 from datetime import date
 
-#Moisture import
+# moisture import
 from grove.grove_moisture_sensor import GroveMoistureSensor
 
-#display import
+# display import
 from grove.display.jhd1802 import JHD1802
 
-#TDS import
+# TDS import
 from TDS import GroveTDS
 
-#Light import
+# light import
 from grove.grove_light_sensor_v1_2 import GroveLightSensor
 
-#temperature import
+# temperature import
 from seeed_dht import DHT
 
-#import for csv file
+# import for csv file
 import csv
 
-#import json for json file
-
+# import json for json file
 import json
 
 from datetime import datetime
 
-import time
-
-#seperate sensor functions to read and process values, to be called in main
+# seperate sensor functions to read and process values, to be called in main
   
-#tds and moisture       
+# tds and moisture       
 def moisture_tds_main():    
-        #read sensor values
+        # read sensor values
         sensor = GroveMoistureSensor(4)
         sensor_tds = GroveTDS(0)
         
-        #print sensor values
+        # print sensor values
         print('TDS Value: {0}'.format(sensor_tds.TDS))
         
         mois = sensor.moisture
@@ -49,32 +46,32 @@ def moisture_tds_main():
         else:
             level = 'wet'
         
-        #print values in terminal (level printed in terminal)      
+        # print values in terminal (level printed in terminal)      
         print('moisture: {}, {}'.format(mois, level)) 
         return mois,sensor_tds.TDS
         
-#light       
+# light       
 def Light_main():      
-        #read sensor values
+        # read sensor values
         sensor = GroveLightSensor(2)
         #print values in terminal
         print('light value {}'.format(sensor.light))
         
         return sensor.light
         
-#temperature 
+# temperature 
 def temp_main():
-        #display
+        # display
         lcd = JHD1802()
-        #find correct port in base hat
+        # find correct port in base hat
         sensor = DHT('11', 5)
         
-        #read sensor values
+        # read sensor values
         humi, temp = sensor.read()
-        #print values in terminal
+        # print values in terminal
         print('temperature {}C, humidity {}%'.format(temp,humi))
             
-        #print values on display
+        # print values on display
         lcd.setCursor(0,0)
         lcd.write('temperature: {0:2}C'.format(temp))
         
@@ -87,10 +84,10 @@ def write_json(new_data, filename="sample.json"):
         file.seek(0)
         json.dump(file_data, file, indent =6)
         
-#main functions calls all sensor functions and writes values in csv file 
+# main functions calls all sensor functions and writes values in csv file 
 def main():
-    #Kann als eingeständige Funktion geshhrieben werde
-    #TO-DO
+    # Kann als eingeständige Funktion geshhrieben werde
+    # TO-DO
     jsonInitializeData = {
         "herby_details": [
         ]
@@ -107,7 +104,7 @@ def main():
         t = time.localtime()
         current_time = time.strftime("%H:%M:%S", t)
 
-        #call all sensors
+        # call all sensors
         mois,tds = moisture_tds_main()
         light = Light_main()
         temp, humi = temp_main()
@@ -122,26 +119,34 @@ def main():
         }
         
         write_json(data)
-        #hello
         
-        #new_data = json.dumps(data, indent = 4)
+        # convert json to js
+        with open('sample.json') as file:
+            data = json.loads(file.read())
+            with open("sensor_data.js", 'w') as file:
+                file.write("const sensor_data =" + str(data))
         
-        #with open("sample.json") as f:
+        
+        # hello
+        
+        # new_data = json.dumps(data, indent = 4)
+        
+        # with open("sample.json") as f:
          #   old_data = json.load(f)
             
             
-        #old_data.update(data)
+        # old_data.update(data)
         
-        #json_herby2 = json.dumps(old_data, indent = i)
+        # json_herby2 = json.dumps(old_data, indent = i)
         
-        #with open("sample.json", "w") as outfile:
+        # with open("sample.json", "w") as outfile:
          #   outfile.write(json_herby2)
         
         
-        #get current date in correct format and write all sensor values in file with according date
+        # get current date in correct format and write all sensor values in file with according date
         
-        #write_json(toWriteJson)
-        #create data frame 
+        # write_json(toWriteJson)
+        # create data frame 
         # df = pd.read_csv('test.csv')
         # df[today] = toWrite
         # df.to_csv('test.csv', index=False)
