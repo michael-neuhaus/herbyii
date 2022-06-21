@@ -1,6 +1,6 @@
 import time
-from mraa import getGpioLookup
-from upm import pyupm_buzzer as upmBuzzer
+# from mraa import getGpioLookup
+# from upm import pyupm_buzzer as upmBuzzer
 # import pandas as pd
 from datetime import date
 
@@ -20,7 +20,7 @@ from grove.grove_light_sensor_v1_2 import GroveLightSensor
 from seeed_dht import DHT
 
 # import for csv file
-import csv
+# import csv
 
 # import json for json file
 import json
@@ -106,10 +106,14 @@ def main():
     while True:
         
         time.sleep(5)
+        
+        # date and time
         currentDate = date.today()
         today = currentDate.strftime('%m/%d/%y')
         t = time.localtime()
         current_time = time.strftime("%H:%M:%S", t)
+        
+        print(today, current_time)
 
         # call all sensors
         mois,tds = moisture_tds_main()
