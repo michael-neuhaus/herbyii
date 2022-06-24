@@ -1,101 +1,128 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>herby</title>
-      <link rel="stylesheet" href="style.css">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-    </head>
+  <head>
+    <link rel="icon" href="./img/icon.png">
+    <title>herby</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  </head>
 
-    <script src="sensor_data.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap');
+  </style>
 
-    <body>
+  <script src="sensor_data.js"></script>
 
-      <div id="logo">
-        <img src="logo.png">
-      </div>
+  <body>
 
-      <div id="panel">
 
-        <script>
-          // get index of newest entry
-          let newest_entry = sensor_data.herby_details.length - 1
-        </script>
 
-        <div id="temperature" class="value-tile">
-          <p class="tile-title">temperature</p>
-          <p id="temperature-value"  class="tile-value"></p>
-          <script>
-            // get and display temerature value
-            let current_temp = sensor_data.herby_details[newest_entry].temp;
-            document.getElementById('temperature-value').innerText = current_temp + "\u00B0C"
-          </script>
-        </div>
+    <div id="logo">
+      <img id="logo-img" src="./img/logo.png">
+    </div>
 
-        <div id="moisture" class="value-tile">
-          <p class="tile-title">moisture</p>
-          <p id="moisture-value" class="tile-value"></p>
-          <script>
-            // get and display moisture value
-            let current_moist = sensor_data.herby_details[newest_entry].moisture;
-            document.getElementById('moisture-value').innerText = current_moist
-          </script>
-        </div>
+    <div id="dark-mode-button-container">
+      <button id="dark-mode-button" onclick="myFunction()"></button>
+    </div>
 
-        <div id="light" class="value-tile">
-          <p class="tile-title">light</p>
-          <p id="light-value" class="tile-value"></p>
-          <script>
-            // get and display light moisture value
-            let current_light = sensor_data.herby_details[newest_entry].light;
-            document.getElementById('light-value').innerText = current_light
-          </script>
-        </div>
+    <script>
+    function myFunction() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+    </script>
 
-        <div id="humidity" class="value-tile">
-          <p class="tile-title">humidity</p>
-          <p id="humidity_value" class="tile-value"></p>
-          <script>
-            // get and display humidity moisture value
-            let current_humidity = sensor_data.herby_details[newest_entry].humi;
-            document.getElementById('humidity_value').innerText = current_humidity
-          </script>
-        </div>
-      </div>
 
-      <div>
-        <p id="timestamp"></p>
-        <script>
-          // get and display timestamp
-          let date = sensor_data.herby_details[newest_entry].date;
-          let time = sensor_data.herby_details[newest_entry].time;
-          document.getElementById('timestamp').innerText = "taken on " + date + " at " + time
-        </script>
-      </div>
 
-      <div class="content">
-
-        <div class="chart-container">
-          <canvas id="temperature-chart"></canvas>
-          <script src="./js/chart_temperature.js"></script>
-        </div>
   
-        <div class="chart-container">
-          <canvas id="moisture-chart"></canvas>
-          <script src="./js/chart_moisture.js"></script>
-        </div>
-  
-        <div class="chart-container">
-          <canvas id="light-chart"></canvas>
-          <script src="./js/chart_light.js"></script>
-        </div>
-  
-        <div class="chart-container">
-          <canvas id="humidity-chart"></canvas>
-          <script src="./js/chart_humidity.js"></script>
-        </div>
+    <section id="overview">
 
+      <script>
+        // get index of newest entry
+        let newest_entry = sensor_data.herby_details.length - 1
+      </script>
+
+      <div id="temperature-box" class="value-box">
+        <img class="value-img" src="./img/temperature-icon2.png">
+        <div class="value-text">
+          <h4>current<br>temperature</h4>
+        </div>
+        <p id="temperature-value" class="value"></p>
+        <script src="./js/value-temp.js"></script>
+        <p class="value-range-info">should stay between<br>18 and 25</p>
       </div>
-      
-    </body>
-    
+          
+      <div id="moisture-box" class="value-box">
+        <img class="value-img" src="./img/moisture-icon2.png">
+        <div class = "value-text">
+            <h4>current<br>moisture</h4>
+        </div>
+        <p id="moisture-value"  class="value"></p>
+        <script src="./js/value-moisture.js"></script>
+        <p class="value-range-info">should stay between<br>1000 & 2000</p>
+      </div>
+
+      <div id="light-box" class = "value-box">
+        <img class="value-img" src="./img/light-icon2.png">
+        <div class = "value-text">
+            <h4>current<br>light</h4>
+        </div>
+        <p id="light-value"  class="value"></p>
+        <script src="./js/value-light.js"></script>
+        <p class="value-range-info">should stay above<br>500</p>
+      </div>
+
+      <div id="humidity-box" class="value-box">
+        <img class="value-img" src="./img/humidity-icon2.png">
+        <div class = "value-text">
+            <h4>current<br>humidity</h4>
+        </div>
+        <p id="humidity-value"  class="value"></p>
+        <script src="./js/value-humidity.js"></script>
+        <p class="value-range-info">should stay between<br>18 and 25</p>
+      </div>
+
+    </section>
+
+    <div>
+      <p id="timestamp"></p>
+      <script>
+        // get and display timestamp
+        let date = sensor_data.herby_details[newest_entry].date;
+        let time = sensor_data.herby_details[newest_entry].time;
+        document.getElementById('timestamp').innerText = "taken on " + date + " at " + time
+      </script>
+    </div>
+
+
+
+
+
+
+
+    <div class="content">
+
+      <div class="chart-container">
+        <canvas id="temperature-chart"></canvas>
+        <script src="./js/chart_temperature.js"></script>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="moisture-chart"></canvas>
+        <script src="./js/chart_moisture.js"></script>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="light-chart"></canvas>
+        <script src="./js/chart_light.js"></script>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="humidity-chart"></canvas>
+        <script src="./js/chart_humidity.js"></script>
+      </div>
+
+    </div>
+
+  </body>
 </html
