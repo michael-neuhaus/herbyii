@@ -10,6 +10,14 @@ for (let i = 0; i < sensor_data.herby_details.length; i++) {
   temp_data.push(sensor_data.herby_details[i].temp)
 }
 
+if (current_temp >= 18 && current_temp <= 25) {
+  chartcolor = "#6BB834"
+}
+else {
+  chartcolor = "#C12415"
+}
+
+
 // genereate chart
 new Chart(document.getElementById("temperature-chart"), {
   type: 'line',
@@ -18,7 +26,7 @@ new Chart(document.getElementById("temperature-chart"), {
     datasets: [{ 
         data: temp_data,
         label: "temperature in C",
-        borderColor: "black",
+        borderColor: chartcolor,
         fill: false
       }
     ]

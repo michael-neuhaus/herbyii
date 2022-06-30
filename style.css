@@ -1,56 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
 h1 {
     text-align: center;
     color: black;
 }
 
-#logo {
-    margin: auto;
-    width: 33%;
+body {
+    font-family: 'Raleway', sans-serif;
+    background: white;
 }
 
-img {
+#logo {
+    margin-top: 5%;
+    margin-bottom: 2.5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    min-width: 120px;
+}
+
+#logo-img {
     max-width:100%;
     max-height:100%;
 }
 
-#panel {
-    width: 66%;
-    height: 100px;
+
+
+/*dark mode*/
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+
+#dark-mode-button-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
     margin: auto;
-    /* border: 1px solid;
-    border-radius: 5px;
-    border-color: #259932; */
-    /* margin-bottom: 100px; */
-
+    margin-top: 2.5%;
+    margin-bottom: 5%;
+    display: table;
 }
 
-.value-tile {
+#dark-mode-button {
+    border-radius: 100%;
+    border: none;
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    background: url("./img/darkmode.png");
+    background-size: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: table-row;
+}
+
+
+
+
+
+
+
+/*overview with current senor data*/
+
+#overview {
+    width: 100%;
+    max-width: 1111px;
+    margin: auto;
+    margin-bottom: 50px;
+    display: table;
+}
+
+.value-box {
+    border-radius: 10px;
     height: 100%;
-    width: 25%;
-    /* border: 1px solid black;
-    border-radius: 5px; */
-    /* margin: 10px; */
+    width: 20%;
     float: left;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    display: table-row;
 }
 
-.tile-title {
-    text-align: center;
+.value-img {
+    margin-top: 12.5%;
+    margin-bottom: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 33%;
 }
 
-.tile-value {
+.value-text {
     text-align: center;
-    margin: 0px;
-    font-size: 33px;
+    /*font-size: 2vw;*/
+    font-size: clamp(16px, 2vw, 22px);
+    word-wrap: break-word;
+}
+
+.value {
+    text-align: center;
+    margin-top: 0%;
+    /*font-size: 4vw;*/
+    /*font-size: 60px;*/
+    font-size: clamp(25px, 4vw, 60px);
+    margin-bottom: 10%;
+}
+
+.value-range-info {
+    text-align: center;
+    /*font-size: 1.2vw;*/
+    /*font-size: 10px;*/
+    font-size: clamp(9px, 1.2vw, 25px);
 }
 
 #timestamp {
+    font-size: 24px;
     text-align: center;
-    margin-top: 25px;
-    
+    margin-top: 25px; 
 }
 
+
+
+
+
+
+/*charts*/
+
 .content {
-    width: 66%;
+    width: 90%;
+    max-width: 1000px;
     margin: auto;
     margin-top: 100px;  
 }
@@ -58,7 +140,6 @@ img {
 .chart-container {
     width: 100%;
     margin: auto;
-    margin-bottom: 100px;
-    /* float: left; */
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
-
