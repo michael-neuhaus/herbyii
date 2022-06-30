@@ -19,9 +19,6 @@ from grove.grove_light_sensor_v1_2 import GroveLightSensor
 # temperature import
 from seeed_dht import DHT
 
-# import for csv file
-# import csv
-
 # import json for json file
 import json
 
@@ -52,52 +49,61 @@ def moisture_tds_main():
         return mois,sensor_tds.TDS
         
 # light       
-def Light_main():
-    
-        # display
-        # lcd = JHD1802()
+def light_main():
     
         # read sensor values
         sensor = GroveLightSensor(2)
     
-        
         #print values in terminal
         print('light value {}'.format(sensor.light))
-        
-        # print values on display
-        # lcd.setCursor(0,0)
-        # lcd.write('light: {0:2}C'.format(sensor))
         
         return sensor.light
         
 # temperature 
 def temp_main():
+
+    # find correct port in base hat
+    sensor = DHT('11', 5)
     
-        # display
-        lcd = JHD1802()
-        
-        # find correct port in base hat
-        sensor = DHT('11', 5)
-        
-        # read sensor values
-        humi, temp = sensor.read()
-        
-        # print values in terminal
-        print('temperature {}C, humidity {}%'.format(temp,humi))
-            
-        # print values on display
-        lcd.setCursor(0,0)
-        lcd.write('temperature: {0:2}C'.format(temp))
+    # read sensor values
+    humi, temp = sensor.read()
     
+    # print values in terminal
+    print('temperature {}C, humidity {}%'.format(temp,humi))
         
-        return temp , humi
+    return temp , humi
 
 def write_json(new_data, filename="sample.json"):
+    
     with open(filename,"r+") as file:
         file_data = json.load(file)
         file_data["herby_details"].append(new_data)
         file.seek(0)
         json.dump(file_data, file, indent =6)
+        
+    
+def display_data_on_lcd(mois,tds,light,temp,humi):
+    
+    # display sensor data on lcd
+    
+    lcd = JHD1802()
+    
+    lcd.setCursor(0,0)
+    lcd.write('moisture: {0:2}'.format(mois))
+    time.sleep(5)
+    lcd.setCursor(0,0)
+    lcd.write('tds: {0:2}'.format(tds))
+    time.sleep(5)
+    lcd.setCursor(0,0)
+    lcd.write('light: {0:2}'.format(light))
+    time.sleep(5)
+    lcd.setCursor(0,0)
+    lcd.write('temperature: {0:2}C'.format(temp))
+    time.sleep(5)
+    lcd.setCursor(0,0)
+    lcd.write('humidity: {0:2}'.format(humi))
+    time.sleep(5)
+    
         
 # main functions calls all sensor functions and writes values in csv file 
 def main():
@@ -114,9 +120,7 @@ def main():
         
     while True:
         
-        time.sleep(5)
-        
-        # date and time
+        # current date and time
         currentDate = date.today()
         today = currentDate.strftime('%m/%d/%y')
         t = time.localtime()
@@ -126,20 +130,17 @@ def main():
 
         # call all sensors
         mois,tds = moisture_tds_main()
-        time.sleep(5)
-        light = Light_main()
-        
-        # display
-        lcd = JHD1802()
-        
-        # print values on display
-        lcd.setCursor(0,0)
-        lcd.write('light: {0:2}'.format(light))
-        
-        time.sleep(5)
-        
+        light = light_main()
         temp, humi = temp_main()
         
+        # display data on lcd
+        # loop takes one hour
+        for i in range(0,144):
+            # takes 25 seconds
+            display_data_on_lcd(mois,tds,light,temp,humi)
+        
+    
+        # prepare data to write in file
         data = {
             "moisture": mois,
             "light" : light,
@@ -151,39 +152,17 @@ def main():
         
         write_json(data)
         
-        # convert json to js
+        # convert json to js file
         with open('sample.json') as file:
             data = json.loads(file.read())
             with open("sensor_data.js", 'w') as file:
                 file.write("const sensor_data =" + str(data))
-        
-        
-        # hello
-        
-        # new_data = json.dumps(data, indent = 4)
-        
-        # with open("sample.json") as f:
-         #   old_data = json.load(f)
-            
-            
-        # old_data.update(data)
-        
-        # json_herby2 = json.dumps(old_data, indent = i)
-        
-        # with open("sample.json", "w") as outfile:
-         #   outfile.write(json_herby2)
-        
-        
-        # get current date in correct format and write all sensor values in file with according date
-        
-        # write_json(toWriteJson)
-        # create data frame 
-        # df = pd.read_csv('test.csv')
-        # df[today] = toWrite
-        # df.to_csv('test.csv', index=False)
-        #sleep for 24h, programm runs once a day
-        
-        
+                
+                
+        # TO DO:
+        # check if any sensor value is out of recommended range
+        # send email alert if that is the case
+        return
 
 if __name__ == '__main__':
     main()
