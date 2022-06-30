@@ -12,9 +12,9 @@ pin6 = 1
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(pin1, GPIO.OUT) # GPIO Modus zuweisen
-GPIO.output(pin1, 0) # aus
+GPIO.output(pin1, 0) # an
 time.sleep(5)
-GPIO.output(pin1, 1) # an
+GPIO.output(pin1, 1) # aus
 time.sleep(5)
 GPIO.output(pin1, 0)
 time.sleep(5)

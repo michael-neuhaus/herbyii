@@ -8,7 +8,7 @@ from datetime import date
 from grove.grove_moisture_sensor import GroveMoistureSensor
 
 # display import
-# from grove.display.jhd1802 import JHD1802
+from grove.display.jhd1802 import JHD1802
 
 # TDS import
 from TDS import GroveTDS
@@ -54,11 +54,19 @@ def moisture_tds_main():
 # light       
 def Light_main():
     
+        # display
+        # lcd = JHD1802()
+    
         # read sensor values
         sensor = GroveLightSensor(2)
+    
         
         #print values in terminal
         print('light value {}'.format(sensor.light))
+        
+        # print values on display
+        # lcd.setCursor(0,0)
+        # lcd.write('light: {0:2}C'.format(sensor))
         
         return sensor.light
         
@@ -66,7 +74,7 @@ def Light_main():
 def temp_main():
     
         # display
-        # lcd = JHD1802()
+        lcd = JHD1802()
         
         # find correct port in base hat
         sensor = DHT('11', 5)
@@ -78,8 +86,9 @@ def temp_main():
         print('temperature {}C, humidity {}%'.format(temp,humi))
             
         # print values on display
-        # lcd.setCursor(0,0)
-        # lcd.write('temperature: {0:2}C'.format(temp))
+        lcd.setCursor(0,0)
+        lcd.write('temperature: {0:2}C'.format(temp))
+    
         
         return temp , humi
 
@@ -93,7 +102,7 @@ def write_json(new_data, filename="sample.json"):
 # main functions calls all sensor functions and writes values in csv file 
 def main():
     
-    # Kann als eingeständige Funktion geshhrieben werde
+    # Kann als eingestaendige Funktion geshhrieben werde
     # TO-DO
     jsonInitializeData = {
         "herby_details": [
@@ -117,7 +126,18 @@ def main():
 
         # call all sensors
         mois,tds = moisture_tds_main()
+        time.sleep(5)
         light = Light_main()
+        
+        # display
+        lcd = JHD1802()
+        
+        # print values on display
+        lcd.setCursor(0,0)
+        lcd.write('light: {0:2}'.format(light))
+        
+        time.sleep(5)
+        
         temp, humi = temp_main()
         
         data = {
