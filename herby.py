@@ -90,21 +90,27 @@ def display_data_on_lcd(mois,tds,light,temp,humi):
     
     lcd.setCursor(0,0)
     lcd.write('moisture: {0:2}'.format(mois))
-    time.sleep(5)
+    # time.sleep(5)
     lcd.setCursor(0,0)
     lcd.write('tds: {0:2}'.format(tds))
-    time.sleep(5)
+    # time.sleep(5)
     lcd.setCursor(0,0)
     lcd.write('light: {0:2}'.format(light))
-    time.sleep(5)
+    # time.sleep(5)
     lcd.setCursor(0,0)
     lcd.write('temperature: {0:2}C'.format(temp))
-    time.sleep(5)
+    # time.sleep(5)
     lcd.setCursor(0,0)
     lcd.write('humidity: {0:2}'.format(humi))
-    time.sleep(5)
+    # time.sleep(5)
     
         
+# def email_alert(mois,tds,light,temp,humi):
+    
+    # if (temp < 18 or temp > 25):
+    
+    # if (mois < 1000 or mois > 2000):
+
 # main functions calls all sensor functions and writes values in csv file 
 def main():
     
@@ -135,11 +141,11 @@ def main():
         
         # display data on lcd
         # loop takes one hour
-        for i in range(0,144):
+        # for i in range(0,144):
             # takes 25 seconds
-            display_data_on_lcd(mois,tds,light,temp,humi)
+            # display_data_on_lcd(mois,tds,light,temp,humi)
         
-    
+        display_data_on_lcd(mois,tds,light,temp,humi)
         # prepare data to write in file
         data = {
             "moisture": mois,
@@ -158,11 +164,12 @@ def main():
             with open("sensor_data.js", 'w') as file:
                 file.write("const sensor_data =" + str(data))
                 
-                
+        time.sleep(5)     
         # TO DO:
         # check if any sensor value is out of recommended range
         # send email alert if that is the case
-        return
+        # return
 
 if __name__ == '__main__':
     main()
+
