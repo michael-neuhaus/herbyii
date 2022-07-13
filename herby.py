@@ -34,7 +34,7 @@ def moisture_tds_main():
         sensor_tds = GroveTDS(0)
         
         # print sensor values
-        print('TDS Value: {0}'.format(sensor_tds.TDS))
+        #print('TDS Value: {0}'.format(sensor_tds.TDS))
         
         mois = sensor.moisture
         if 0 <= mois and mois < 300:
@@ -45,7 +45,7 @@ def moisture_tds_main():
             level = 'wet'
         
         # print values in terminal (level printed in terminal)      
-        print('moisture: {}, {}'.format(mois, level)) 
+        #print('moisture: {}, {}'.format(mois, level)) 
         return mois,sensor_tds.TDS
         
 # light       
@@ -55,7 +55,7 @@ def light_main():
         sensor = GroveLightSensor(2)
     
         #print values in terminal
-        print('light value {}'.format(sensor.light))
+        #print('light value {}'.format(sensor.light))
         
         return sensor.light
         
@@ -69,7 +69,7 @@ def temp_main():
     humi, temp = sensor.read()
     
     # print values in terminal
-    print('temperature {}C, humidity {}%'.format(temp,humi))
+    #print('temperature {}C, humidity {}%'.format(temp,humi))
         
     return temp , humi
 
@@ -132,7 +132,7 @@ def main():
         t = time.localtime()
         current_time = time.strftime("%H:%M:%S", t)
         
-        print(today, current_time)
+        #print(today, current_time)
 
         # call all sensors
         mois,tds = moisture_tds_main()
@@ -164,7 +164,8 @@ def main():
             with open("sensor_data.js", 'w') as file:
                 file.write("const sensor_data =" + str(data))
                 
-        time.sleep(5)     
+        time.sleep(5)
+        
         # TO DO:
         # check if any sensor value is out of recommended range
         # send email alert if that is the case

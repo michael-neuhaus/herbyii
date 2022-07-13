@@ -2,9 +2,9 @@ import RPi.GPIO as GPIO
 import time
  # GPIO Nummern statt Board Nummern
 
-pin1 = 11 # luftpumpe
-pin2 = 13 # nüscht
-pin3 = 15 # nüscht
+pin1 = 11 #luftpumpe
+pin2 = 13 #nuescht
+pin3 = 15 # nuescht
 pin4 = 19 # licht
 pin5 = 21 # Kreis 1
 pin6 = 23 # Pumpe Rein [80]
@@ -22,5 +22,10 @@ GPIO.setup(pin5, GPIO.OUT)
 GPIO.setup(pin6, GPIO.OUT)
 
 
-GPIO.output(pin5,0)
-GPIO.output(pin8,0)
+GPIO.output(pin1,1)
+GPIO.output(pin4,1)
+GPIO.output(pin5,1)# an
+GPIO.output(pin6,1)
+GPIO.output(pin7,1)
+GPIO.output(pin8,1)
+
