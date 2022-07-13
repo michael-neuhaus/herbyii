@@ -6,12 +6,12 @@ for (let i = 0; i < sensor_data.herby_details.length; i++) {
 }
 
 // create array for temperature data
-let moist_data = []
+let tds_data = []
 for (let i = 0; i < sensor_data.herby_details.length; i++) { 
-  moist_data.push(sensor_data.herby_details[i].moisture)
+  tds_data.push(sensor_data.herby_details[i].tds)
 }
 
-if (current_moist >= 500 && current_moist <= 1700) {
+if (current_tds >= 500 && current_tds <= 1700) {
   chartcolor = "#6BB834"
 }
 else {
@@ -19,12 +19,12 @@ else {
 }
 
 // genereate chart
-new Chart(document.getElementById("moisture-chart"), {
+new Chart(document.getElementById("tds-chart"), {
   type: 'line',
   data: {
     labels: x_axis_labels,
     datasets: [{ 
-        data: moist_data,
+        data: tds_data,
         label: "TDS",
         borderColor: chartcolor,
         fill: false

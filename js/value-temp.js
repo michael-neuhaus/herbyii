@@ -1,5 +1,5 @@
 // get and display temerature value
-let current_temp = sensor_data.herby_details[newest_entry].temp;
+let current_temp = sensor_data.herby_details[newest_entry].temperature;
 document.getElementById('temperature-value').innerText = current_temp + "\u00B0C"
 
 // color the value box green or red depenening acceptable range
