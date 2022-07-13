@@ -19,7 +19,7 @@ else {
 }
 
 // genereate chart
-new Chart(document.getElementById("moisture-chart"), {
+new Chart(document.getElementById("tds-chart"), {
   type: 'line',
   data: {
     labels: x_axis_labels,
