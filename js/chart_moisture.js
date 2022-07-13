@@ -11,7 +11,7 @@ for (let i = 0; i < sensor_data.herby_details.length; i++) {
   moist_data.push(sensor_data.herby_details[i].moisture)
 }
 
-if (current_moist >= 1000 && current_moist <= 2000) {
+if (current_moist >= 500 && current_moist <= 1700) {
   chartcolor = "#6BB834"
 }
 else {
