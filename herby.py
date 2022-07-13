@@ -1,78 +1,35 @@
 import time
-# from mraa import getGpioLookup
-# from upm import pyupm_buzzer as upmBuzzer
-# import pandas as pd
 from datetime import date
-
-# moisture import
-from grove.grove_moisture_sensor import GroveMoistureSensor
-
-# display import
-from grove.display.jhd1802 import JHD1802
-
-# TDS import
-from TDS import GroveTDS
-
-# light import
-from grove.grove_light_sensor_v1_2 import GroveLightSensor
-
-# temperature import
-from seeed_dht import DHT
-
-# import json for json file
 import json
 
-from datetime import datetime
+# sensor imports
+from grove.grove_moisture_sensor import GroveMoistureSensor
+from grove.display.jhd1802 import JHD1802
+from TDS import GroveTDS
+from grove.grove_light_sensor_v1_2 import GroveLightSensor
+from seeed_dht import DHT
 
-# seperate sensor functions to read and process values, to be called in main
+
   
-# tds and moisture       
-def moisture_tds_main():
-    
-        # read sensor values
-        # sensor = GroveMoistureSensor(4)
+# tds sensor     
+def tds_sensor():
         sensor_tds = GroveTDS(0)
-        
-        # print sensor values
-        #print('TDS Value: {0}'.format(sensor_tds.TDS))
-        
-        # mois = sensor.moisture
-        # if 0 <= mois and mois < 300:
-        #    level = 'dry'
-        # elif 300 <= mois and mois < 600:
-        #    level = 'moist'
-        # else:
-        #    level = 'wet'
-        
-        # print values in terminal (level printed in terminal)      
-        #print('moisture: {}, {}'.format(mois, level)) 
-        # return mois,sensor_tds.TDS
-        return sensor_tds.TDS
+        return round(sensor_tds.TDS)
         
 # light       
-def light_main():
-    
-        # read sensor values
+def light_sensor():
         sensor = GroveLightSensor(2)
-    
-        # print values in terminal
-        # print('light value {}'.format(sensor.light))
-        
         return sensor.light
         
 # temperature 
-def temp_main():
+def temp_and_humid_sensor():
 
     # find correct port in base hat
     sensor = DHT('11', 5)
     
     # read sensor values
-    humi, temp = sensor.read()
-    
-    # print values in terminal
-    # print('temperature {}C, humidity {}%'.format(temp,humi))
-        
-    return humi, temp
+    humidity, temp = sensor.read()        
+    return humidity, temp
 
 def write_json(new_data, filename="sample.json"):
     
@@ -82,39 +39,40 @@ def write_json(new_data, filename="sample.json"):
         file.seek(0)
         json.dump(file_data, file, indent =6)
         
-    
-def display_data_on_lcd(tds,light,temp,humi):
-    
-    # display sensor data on lcd
+# display sensor data on lcd    
+def display_data_on_lcd(tds,light,temp,humid):
     
     lcd = JHD1802()
-    lcd.write("test")
-    time.sleep(5)
+
     lcd.setCursor(0,0)
     lcd.write('tds: {0:2}'.format(tds))
     time.sleep(5)
+    
     lcd.setCursor(0,0)
     lcd.write('light: {0:2}'.format(light))
     time.sleep(5)
+    
     lcd.setCursor(0,0)
     lcd.write('temperature: {0:2}C'.format(temp))
     time.sleep(5)
-    lcd.setCursor(0,0)
-    lcd.write('humidity: {0:2}'.format(humi))
-    # time.sleep(5)
     
-def display_data_on_console(tds,light,temp,humi):
+    lcd.setCursor(0,0)
+    lcd.write('humidity: {0:2}'.format(humid))
+    time.sleep(5)
+    
+def display_data_on_console(tds,light,temp,humid):
+    
     print("TDS: ", tds)
     print("light: ", light)
     print("temperature: ",temp)
-    print("humidity: ", humi)
+    print("humidity: ", humid)
+    
 # def email_alert(mois,tds,light,temp,humi):
     
     # if (temp < 18 or temp > 25):
     
     # if (mois < 1000 or mois > 2000):
-
-# main functions calls all sensor functions and writes values in csv file 
+ 
 def main():
     
     # Kann als eingestaendige Funktion geshhrieben werde
@@ -134,13 +92,11 @@ def main():
         today = currentDate.strftime('%m/%d/%y')
         t = time.localtime()
         current_time = time.strftime("%H:%M:%S", t)
-        
-        #print(today, current_time)
 
         # call all sensors
-        tds = round(moisture_tds_main())
-        light = light_main()
-        humi, temp = temp_main()
+        tds = tds_sensor()
+        light = light_sensor()
+        humid, temp = temp_and_humid_sensor()
         
         # display data on lcd
         # loop takes one hour
@@ -148,14 +104,15 @@ def main():
             # takes 25 seconds
             # display_data_on_lcd(mois,tds,light,temp,humi)
         
-        display_data_on_lcd(tds,light,temp,humi)
-        display_data_on_console(tds,light,temp,humi)
+        display_data_on_console(tds,light,temp,humid)
+        display_data_on_lcd(tds,light,temp,humid)
+        
         # prepare data to write in file
         data = {
-            "moisture": tds,
+            "tds": tds,
             "light" : light,
-            "temp" : temp,
-            "humi" : humi,
+            "temperature" : temp,
+            "humidity" : humid,
             "date" : today,
             "time" : current_time,
         }

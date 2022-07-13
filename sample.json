@@ -1,36 +1,36 @@
 {
       "herby_details": [
             {
-                  "moisture": 543,
-                  "light": 608,
-                  "temp": 24,
-                  "humi": 95,
-                  "date": "07/13/22",
-                  "time": "16:57:08"
-            },
-            {
-                  "moisture": 543,
-                  "light": 608,
-                  "temp": 24,
-                  "humi": 95,
-                  "date": "07/13/22",
-                  "time": "16:57:59"
-            },
-            {
-                  "moisture": 543,
+                  "tds": 544,
                   "light": 607,
-                  "temp": 24,
-                  "humi": 95,
+                  "temperature": 24,
+                  "humidity": 95,
                   "date": "07/13/22",
-                  "time": "16:58:50"
+                  "time": "17:25:06"
             },
             {
-                  "moisture": 543,
-                  "light": 607,
-                  "temp": 24,
-                  "humi": 95,
+                  "tds": 543,
+                  "light": 609,
+                  "temperature": 24,
+                  "humidity": 95,
                   "date": "07/13/22",
-                  "time": "16:59:41"
+                  "time": "17:25:57"
+            },
+            {
+                  "tds": 543,
+                  "light": 608,
+                  "temperature": 24,
+                  "humidity": 95,
+                  "date": "07/13/22",
+                  "time": "17:26:47"
+            },
+            {
+                  "tds": 544,
+                  "light": 609,
+                  "temperature": 24,
+                  "humidity": 95,
+                  "date": "07/13/22",
+                  "time": "17:27:37"
             }
       ]
 }
