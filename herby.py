@@ -98,14 +98,9 @@ def main():
         light = light_sensor()
         humid, temp = temp_and_humid_sensor()
         
-        # display data on lcd
-        # loop takes one hour
-        # for i in range(0,144):
-            # takes 25 seconds
-            # display_data_on_lcd(mois,tds,light,temp,humi)
         
-        display_data_on_console(tds,light,temp,humid)
-        display_data_on_lcd(tds,light,temp,humid)
+        
+        
         
         # prepare data to write in file
         data = {
@@ -124,8 +119,15 @@ def main():
             data = json.loads(file.read())
             with open("sensor_data.js", 'w') as file:
                 file.write("const sensor_data =" + str(data))
-                
-        time.sleep(30)
+        
+        # display_data_on_console(tds,light,temp,humid)
+        display_data_on_lcd(tds,light,temp,humid)
+        
+        # display data on lcd
+        # takes 30 minutes
+        for i in range(0,72):
+            # takes 25 seconds
+            display_data_on_lcd(tds,light,temp,humid)
         
         # TO DO:
         # check if any sensor value is out of recommended range
