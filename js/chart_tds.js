@@ -6,9 +6,9 @@ for (let i = 0; i < sensor_data.herby_details.length; i++) {
 }
 
 // create array for temperature data
-let moist_data = []
+let tds_data = []
 for (let i = 0; i < sensor_data.herby_details.length; i++) { 
-  moist_data.push(sensor_data.herby_details[i].tds)
+  tds_data.push(sensor_data.herby_details[i].tds)
 }
 
 if (current_moist >= 500 && current_moist <= 1700) {
