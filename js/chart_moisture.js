@@ -25,7 +25,7 @@ new Chart(document.getElementById("moisture-chart"), {
     labels: x_axis_labels,
     datasets: [{ 
         data: moist_data,
-        label: "moisture",
+        label: "TDS",
         borderColor: chartcolor,
         fill: false
       }
