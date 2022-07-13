@@ -7,7 +7,7 @@ for (let i = 0; i < sensor_data.herby_details.length; i++) {
 // create array for temperature data
 let temp_data = []
 for (let i = 0; i < sensor_data.herby_details.length; i++) { 
-  temp_data.push(sensor_data.herby_details[i].temp)
+  temp_data.push(sensor_data.herby_details[i].temperature)
 }
 
 if (current_temp >= 18 && current_temp <= 25) {
