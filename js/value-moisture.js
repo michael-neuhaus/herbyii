@@ -1,10 +1,10 @@
 // get and display moisture value
-let current_moist = sensor_data.herby_details[newest_entry].moisture;
-document.getElementById('TDS-value').innerText = current_moist
+let current_tds = sensor_data.herby_details[newest_entry].tds;
+document.getElementById('TDS-value').innerText = current_tds
 
 // color the value box green or red depenening acceptable range
 function color() {
-  if (current_moist >= 500 && current_moist <= 1700) {
+  if (current_tds >= 500 && current_tds <= 1700) {
     document.getElementById('TDS-box').style.backgroundColor = "#6BB834"
     document.getElementById('TDS-box').style.color = "#1C370A"
     document.getElementById('TDS-box').style.boxShadow = "5px 10px 30px #6BB834"
