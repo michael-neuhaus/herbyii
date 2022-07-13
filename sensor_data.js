@@ -1,1 +1,1 @@
-const sensor_data ={'herby_details': [{'moisture': 543, 'light': 609, 'temp': 24, 'humi': 95, 'date': '07/13/22', 'time': '16:26:58'}]}
+const sensor_data ={'herby_details': [{'moisture': 543, 'light': 609, 'temp': 24, 'humi': 95, 'date': '07/13/22', 'time': '16:26:58'}, {'moisture': 544, 'light': 608, 'temp': 24, 'humi': 95, 'date': '07/13/22', 'time': '16:27:48'}]}
