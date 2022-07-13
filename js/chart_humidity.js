@@ -7,7 +7,7 @@ for (let i = 0; i < sensor_data.herby_details.length; i++) {
 // create array for humidity data
 let humidity_data = []
 for (let i = 0; i < sensor_data.herby_details.length; i++) { 
-  humidity_data.push(sensor_data.herby_details[i].humi)
+  humidity_data.push(sensor_data.herby_details[i].humidity)
 }
 
 if (current_humidity >= 18 && current_humidity <= 25) {
