@@ -30,23 +30,24 @@ from datetime import datetime
 def moisture_tds_main():
     
         # read sensor values
-        sensor = GroveMoistureSensor(4)
+        # sensor = GroveMoistureSensor(4)
         sensor_tds = GroveTDS(0)
         
         # print sensor values
         #print('TDS Value: {0}'.format(sensor_tds.TDS))
         
-        mois = sensor.moisture
-        if 0 <= mois and mois < 300:
-            level = 'dry'
-        elif 300 <= mois and mois < 600:
-            level = 'moist'
-        else:
-            level = 'wet'
+        # mois = sensor.moisture
+        # if 0 <= mois and mois < 300:
+        #    level = 'dry'
+        # elif 300 <= mois and mois < 600:
+        #    level = 'moist'
+        # else:
+        #    level = 'wet'
         
         # print values in terminal (level printed in terminal)      
         #print('moisture: {}, {}'.format(mois, level)) 
-        return mois,sensor_tds.TDS
+        # return mois,sensor_tds.TDS
+        return sensor_tds.TDS
         
 # light       
 def light_main():
@@ -54,8 +55,8 @@ def light_main():
         # read sensor values
         sensor = GroveLightSensor(2)
     
-        #print values in terminal
-        #print('light value {}'.format(sensor.light))
+        # print values in terminal
+        # print('light value {}'.format(sensor.light))
         
         return sensor.light
         
@@ -69,9 +70,9 @@ def temp_main():
     humi, temp = sensor.read()
     
     # print values in terminal
-    #print('temperature {}C, humidity {}%'.format(temp,humi))
+    # print('temperature {}C, humidity {}%'.format(temp,humi))
         
-    return temp , humi
+    return humi, temp
 
 def write_json(new_data, filename="sample.json"):
     
@@ -82,29 +83,31 @@ def write_json(new_data, filename="sample.json"):
         json.dump(file_data, file, indent =6)
         
     
-def display_data_on_lcd(mois,tds,light,temp,humi):
+def display_data_on_lcd(tds,light,temp,humi):
     
     # display sensor data on lcd
     
     lcd = JHD1802()
-    
-    lcd.setCursor(0,0)
-    lcd.write('moisture: {0:2}'.format(mois))
-    # time.sleep(5)
+    lcd.write("test")
+    time.sleep(5)
     lcd.setCursor(0,0)
     lcd.write('tds: {0:2}'.format(tds))
-    # time.sleep(5)
+    time.sleep(5)
     lcd.setCursor(0,0)
     lcd.write('light: {0:2}'.format(light))
-    # time.sleep(5)
+    time.sleep(5)
     lcd.setCursor(0,0)
     lcd.write('temperature: {0:2}C'.format(temp))
-    # time.sleep(5)
+    time.sleep(5)
     lcd.setCursor(0,0)
     lcd.write('humidity: {0:2}'.format(humi))
     # time.sleep(5)
     
-        
+def display_data_on_console(tds,light,temp,humi):
+    print("TDS: ", tds)
+    print("light: ", light)
+    print("temperature: ",temp)
+    print("humidity: ", humi)
 # def email_alert(mois,tds,light,temp,humi):
     
     # if (temp < 18 or temp > 25):
@@ -135,9 +138,9 @@ def main():
         #print(today, current_time)
 
         # call all sensors
-        mois,tds = moisture_tds_main()
+        tds = round(moisture_tds_main())
         light = light_main()
-        temp, humi = temp_main()
+        humi, temp = temp_main()
         
         # display data on lcd
         # loop takes one hour
@@ -145,10 +148,11 @@ def main():
             # takes 25 seconds
             # display_data_on_lcd(mois,tds,light,temp,humi)
         
-        display_data_on_lcd(mois,tds,light,temp,humi)
+        display_data_on_lcd(tds,light,temp,humi)
+        display_data_on_console(tds,light,temp,humi)
         # prepare data to write in file
         data = {
-            "moisture": mois,
+            "moisture": tds,
             "light" : light,
             "temp" : temp,
             "humi" : humi,
@@ -164,7 +168,7 @@ def main():
             with open("sensor_data.js", 'w') as file:
                 file.write("const sensor_data =" + str(data))
                 
-        time.sleep(5)
+        time.sleep(30)
         
         # TO DO:
         # check if any sensor value is out of recommended range

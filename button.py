@@ -3,12 +3,10 @@ import time
 from buzz import *
 import os
 
-
-
-pin1 = 11 # luftpumpe
-pin2 = 13 # nuescht
-pin3 = 15 # nuescht
-pin4 = 19 # licht
+pin1 = 11 # Luftpumpe
+pin2 = 13 # nichts
+pin3 = 15 # nichts
+pin4 = 19 # Licht
 pin5 = 21 # Kreis 1
 pin6 = 23 # Pumpe Rein [80]
 pin7 = 10 # Pumpe Raus [35]
@@ -33,15 +31,16 @@ GPIO.output(pin8,0)
 GPIO.output(pin7,1)
 GPIO.output(pin6,1)
 
-
-
 while True:
+    
     if (GPIO.input(38) == 1) :
+        
+        # Wasserwechsel starten
         print ("Wasserwechsel initialsiert")
         os.system("sudo python3 grove_pwm_buzzer.py")
         GPIO.output(pin5,1)
         GPIO.output(pin8,1)
-        GPIO.output(pin7,0)# an
+        GPIO.output(pin7,0) # an
         time.sleep(30)
         GPIO.output(pin7,1)
         GPIO.output(pin6,0)
@@ -54,8 +53,8 @@ while True:
         time.sleep(5)
         GPIO.output(pin5,1)
         GPIO.output(pin8,1)
-        # normalzustand wiederherstellung
         
+        # Normalzustand wiederherstellen
         GPIO.output(pin1,0)
         GPIO.output(pin4,0)
         GPIO.output(pin5,0)
@@ -65,5 +64,6 @@ while True:
         GPIO.setup(38, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         os.system("sudo python3 grove_pwm_buzzer.py")
         print("wasswerchsel beendet")
-    print("button nicht gedrückt")    
+        
+    # print("button nicht gedrückt")    
     time.sleep(.5)
