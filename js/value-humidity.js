@@ -1,5 +1,5 @@
 // get and display humidity moisture value
-let current_humidity = sensor_data.herby_details[newest_entry].humi;
+let current_humidity = sensor_data.herby_details[newest_entry].humidity;
 document.getElementById('humidity-value').innerText = current_humidity
 
 // color the value box green or red depenening acceptable range
