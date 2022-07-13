@@ -24,7 +24,7 @@ new Chart(document.getElementById("tds-chart"), {
   data: {
     labels: x_axis_labels,
     datasets: [{ 
-        data: moist_data,
+        data: tds_data,
         label: "TDS",
         borderColor: chartcolor,
         fill: false
