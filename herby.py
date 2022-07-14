@@ -124,20 +124,20 @@ def main():
         os.system('git push')
         
         display_data_on_console(tds,light,temp,humid)
-        display_data_on_lcd(tds,light,temp,humid)
+        # display_data_on_lcd(tds,light,temp,humid)
         
         # display data on lcd
         # takes 30 minutes
-        # for i in range(0,72):
+        for i in range(0,72):
             # takes 25 seconds
-            # display_data_on_lcd(tds,light,temp,humid)
+            display_data_on_lcd(tds,light,temp,humid)
         
         # TO DO:
         # check if any sensor value is out of recommended range
         # send email alert if that is the case
         # return
         
-        time.sleep(12)
+        # time.sleep(12)
 
 if __name__ == '__main__':
     main()
