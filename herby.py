@@ -2,6 +2,8 @@ import time
 from datetime import date
 import json
 
+import os
+
 # sensor imports
 from grove.grove_moisture_sensor import GroveMoistureSensor
 from grove.display.jhd1802 import JHD1802
@@ -45,19 +47,19 @@ def display_data_on_lcd(tds,light,temp,humid):
     lcd = JHD1802()
 
     lcd.setCursor(0,0)
-    lcd.write('tds: {0:2}'.format(tds))
+    lcd.write('tds: {}'.format(tds))
     time.sleep(5)
     
     lcd.setCursor(0,0)
-    lcd.write('light: {0:2}'.format(light))
+    lcd.write('light: {}'.format(light))
     time.sleep(5)
     
     lcd.setCursor(0,0)
-    lcd.write('temperature: {0:2}C'.format(temp))
+    lcd.write('temperature: {}C'.format(temp))
     time.sleep(5)
     
     lcd.setCursor(0,0)
-    lcd.write('humidity: {0:2}'.format(humid))
+    lcd.write('humidity: {}%'.format(humid))
     time.sleep(5)
     
 def display_data_on_console(tds,light,temp,humid):
@@ -98,10 +100,6 @@ def main():
         light = light_sensor()
         humid, temp = temp_and_humid_sensor()
         
-        
-        
-        
-        
         # prepare data to write in file
         data = {
             "tds": tds,
@@ -119,22 +117,27 @@ def main():
             data = json.loads(file.read())
             with open("sensor_data.js", 'w') as file:
                 file.write("const sensor_data =" + str(data))
+                
+                
+        os.system('git add .')
+        os.system('git commit -m "auto push"')
+        os.system('git push')
         
-        # display_data_on_console(tds,light,temp,humid)
+        display_data_on_console(tds,light,temp,humid)
         display_data_on_lcd(tds,light,temp,humid)
         
         # display data on lcd
         # takes 30 minutes
-        for i in range(0,72):
+        # for i in range(0,72):
             # takes 25 seconds
-            display_data_on_lcd(tds,light,temp,humid)
+            # display_data_on_lcd(tds,light,temp,humid)
         
         # TO DO:
         # check if any sensor value is out of recommended range
         # send email alert if that is the case
         # return
         
-        # test
+        time.sleep(12)
 
 if __name__ == '__main__':
     main()
