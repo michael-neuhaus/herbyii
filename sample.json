@@ -807,6 +807,14 @@
                   "humidity": 95,
                   "date": "07/16/22",
                   "time": "08:14:57"
+            },
+            {
+                  "tds": 549,
+                  "light": 607,
+                  "temperature": 23,
+                  "humidity": 95,
+                  "date": "07/16/22",
+                  "time": "08:39:07"
             }
       ]
 }
