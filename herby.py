@@ -119,9 +119,9 @@ def main():
                 file.write("const sensor_data =" + str(data))
                 
                 
-        # os.system('git add .')
-        # os.system('git commit -m "auto push"')
-        # os.system('git push')
+        os.system('git add .')
+        os.system('git commit -m "auto push"')
+        os.system('git push')
         
         display_data_on_console(tds,light,temp,humid)
         # display_data_on_lcd(tds,light,temp,humid)
@@ -136,6 +136,8 @@ def main():
         # check if any sensor value is out of recommended range
         # send email alert if that is the case
         # return
+        
+        # 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
         
         # time.sleep(12)
 
