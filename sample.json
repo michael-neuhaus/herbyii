@@ -1,12 +1,12 @@
 {
       "herby_details": [
             {
-                  "tds": 568,
+                  "tds": 545,
                   "light": 607,
-                  "temperature": 22,
+                  "temperature": 23,
                   "humidity": 95,
                   "date": "07/18/22",
-                  "time": "14:04:18"
+                  "time": "14:05:22"
             }
       ]
 }
