@@ -119,9 +119,9 @@ def main():
                 file.write("const sensor_data =" + str(data))
                 
                 
-        os.system('git add .')
-        os.system('git commit -m "auto push"')
-        os.system('git push')
+        # os.system('git add .')
+        # os.system('git commit -m "auto push"')
+        # os.system('git push')
         
         display_data_on_console(tds,light,temp,humid)
         
