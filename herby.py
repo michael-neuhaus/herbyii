@@ -78,8 +78,8 @@ def display_data_on_console(tds,light,temp,humid):
     
 def email_alert(mois,tds,light,temp, current_time):
     
-    # print(current_time[0], current_time[1])
-    print("test")
+    print(current_time[0], current_time[1])
+    # print("test")
     
     # if (temp < 18 or temp > 25):
     
@@ -135,6 +135,8 @@ def main():
         
         display_data_on_console(tds,light,temp,humid)
         
+        email_alert(mois,tds,light,temp, current_time)
+        
         # display data on lcd
         # takes 30 minutes
         for i in range(0,72):
@@ -142,7 +144,7 @@ def main():
             display_data_on_lcd(tds,light,temp,humid)
             
         # send email if a value out of bounds
-        email_alert(mois,tds,light,temp, current_time)
+        
         
         # time.sleep(12)
 
