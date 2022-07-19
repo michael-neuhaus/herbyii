@@ -18,8 +18,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 
-
-  
 # tds sensor     
 def tds_sensor():
         sensor_tds = GroveTDS(0)
@@ -78,7 +76,8 @@ def display_data_on_console(tds,light,temp,humid):
     
 def email_alert(tds,light,temp, current_time):
     
-    # check if value is out of bounds 
+    # check if a value is out of bounds
+    # ignore humidity
     if (tds < 500 or light < 500 or temp < 18 or temp > 25):
         # check hours and minutes of current time to only send one email per day
         # only sends between 06:00 and 06:30
@@ -106,11 +105,10 @@ def email_alert(tds,light,temp, current_time):
 
                 server.sendmail(email_user,email_send,text)
                 server.quit()
- 
-def main():
+                
+                
+def create_json_file():
     
-    # Kann als eingestaendige Funktion geshhrieben werde
-    # TO-DO
     jsonInitializeData = {
         "herby_details": [
         ]
@@ -119,6 +117,18 @@ def main():
     with open("sample.json","w") as outfile:
         outfile.write(json_herby_ini)
         
+def convert_json_to_js_file():
+    
+    with open('sample.json') as file:
+            data = json.loads(file.read())
+            with open("sensor_data.js", 'w') as file:
+                file.write("const sensor_data =" + str(data))
+    
+ 
+def main():
+    
+    create_json_file()
+    
     while True:
         
         # current date and time
@@ -127,7 +137,7 @@ def main():
         t = time.localtime()
         current_time = time.strftime("%H:%M:%S", t)
 
-        # call all sensors
+        # call all sensor functions
         tds = tds_sensor()
         light = light_sensor()
         humid, temp = temp_and_humid_sensor()
@@ -143,32 +153,23 @@ def main():
         }
         
         write_json(data)
+        convert_json_to_js_file()
         
-        # convert json to js file
-        with open('sample.json') as file:
-            data = json.loads(file.read())
-            with open("sensor_data.js", 'w') as file:
-                file.write("const sensor_data =" + str(data))
-                
-                
-        # os.system('git add .')
-        # os.system('git commit -m "auto push"')
-        # os.system('git push')
+        # push all changes to github      
+        os.system('git add .')
+        os.system('git commit -m "auto push"')
+        os.system('git push')
         
-        display_data_on_console(tds,light,temp,humid)
+        # display_data_on_console(tds,light,temp,humid)
         
         email_alert(tds,light,temp, current_time)
         
         # display data on lcd
-        # takes 30 minutes
+        # takes 30 minutes (25*72 seconds)
         for i in range(0,72):
             # takes 25 seconds
             display_data_on_lcd(tds,light,temp,humid)
             
-        # send email if a value out of bounds
-        
-        
-        # time.sleep(12)
 
 if __name__ == '__main__':
     main()
