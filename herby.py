@@ -78,7 +78,8 @@ def display_data_on_console(tds,light,temp,humid):
     
 def email_alert(mois,tds,light,temp, current_time):
     
-    print(current_time[0], current_time[1])
+    # print(current_time[0], current_time[1])
+    print("test")
     
     # if (temp < 18 or temp > 25):
     
