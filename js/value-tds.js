@@ -1,6 +1,6 @@
 // get and display moisture value
 let current_tds = sensor_data.herby_details[newest_entry].tds;
-document.getElementById('TDS-value').innerText = current_tds
+document.getElementById('TDS-value').innerText = current_tds + "ppm";
 
 // color the value box green or red depenening acceptable range
 function color() {
