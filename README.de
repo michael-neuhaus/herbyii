@@ -1,1 +1,4 @@
-# herbyii
+herby is a small hydroponic plant growing system.
+
+This reposiroty contains the code that herby runs as well as the code for the website. 
+herby automically pushes its sensor data to this repository every 30 minutes. 
