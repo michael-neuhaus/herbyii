@@ -11,6 +11,13 @@ from TDS import GroveTDS
 from grove.grove_light_sensor_v1_2 import GroveLightSensor
 from seeed_dht import DHT
 
+# email imports
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+
 
   
 # tds sensor     
@@ -69,7 +76,9 @@ def display_data_on_console(tds,light,temp,humid):
     print("temperature: ",temp)
     print("humidity: ", humid)
     
-# def email_alert(mois,tds,light,temp,humi):
+def email_alert(mois,tds,light,temp, current_time):
+    
+    print(current_time[0], current_time[1])
     
     # if (temp < 18 or temp > 25):
     
@@ -130,14 +139,13 @@ def main():
         for i in range(0,72):
             # takes 25 seconds
             display_data_on_lcd(tds,light,temp,humid)
-        
-        # TO DO:
-        # check if any sensor value is out of recommended range
-        # send email alert if that is the case
-        # return
+            
+        # send email if a value out of bounds
+        email_alert(mois,tds,light,temp, current_time)
         
         # time.sleep(12)
 
 if __name__ == '__main__':
     main()
+
 
