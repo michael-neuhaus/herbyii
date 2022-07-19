@@ -76,14 +76,36 @@ def display_data_on_console(tds,light,temp,humid):
     print("temperature: ",temp)
     print("humidity: ", humid)
     
-def email_alert(mois,tds,light,temp, current_time):
+def email_alert(tds,light,temp, current_time):
     
-    print(current_time[0], current_time[1])
-    # print("test")
-    
-    # if (temp < 18 or temp > 25):
-    
-    # if (mois < 1000 or mois > 2000):
+    # check if value is out of bounds 
+    if (tds < 500 or light < 500 or temp < 18 or temp > 25):
+        # check hours and minutes of current time to only send one email per day
+        # only sends between 06:00 and 06:30
+        if (int(current_time[0]) == 0 and int(current_time[1]) == 6):
+            if (int(current_time[3])*10 + int(current_time[4]) < 30):
+                
+                email_user = "herbyalert@gmail.com"
+                email_password = "rpytmofsaefwytuw"
+                email_send = "michael.neuhaus97@gmail.com"
+
+                subject = "herby alert"
+
+                msg = MIMEMultipart()
+                msg["From"] = email_user
+                msg["To"] = email_send
+                msg["Subject"] = subject
+
+                body = "One of herby's sensors has measured a value out of the recommended range."
+                msg.attach(MIMEText(body,"plain"))
+
+                text = msg.as_string()
+                server = smtplib.SMTP("smtp.gmail.com",587)
+                server.starttls()
+                server.login(email_user,email_password)
+
+                server.sendmail(email_user,email_send,text)
+                server.quit()
  
 def main():
     
@@ -129,13 +151,13 @@ def main():
                 file.write("const sensor_data =" + str(data))
                 
                 
-        os.system('git add .')
-        os.system('git commit -m "auto push"')
-        os.system('git push')
+        # os.system('git add .')
+        # os.system('git commit -m "auto push"')
+        # os.system('git push')
         
         display_data_on_console(tds,light,temp,humid)
         
-        email_alert(mois,tds,light,temp, current_time)
+        email_alert(tds,light,temp, current_time)
         
         # display data on lcd
         # takes 30 minutes
