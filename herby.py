@@ -156,7 +156,7 @@ def main():
         convert_json_to_js_file()
         
         # push all changes to github
-        os.syystem('rm -f .git/index.lock')
+        os.system('rm -f .git/index.lock')
         os.system('find .git/objects/ -size 0 -exec rm -f {} \;')
         os.system('git fetch origin')
         os.system('git reset --hard origin/main')
