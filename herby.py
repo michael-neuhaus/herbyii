@@ -131,6 +131,8 @@ def main():
     
     while True:
         
+        count = 0
+        
         # current date and time
         currentDate = date.today()
         today = currentDate.strftime('%m/%d/%y')
@@ -156,11 +158,12 @@ def main():
         convert_json_to_js_file()
         
         # push all changes to github
-        os.system('rm -f .git/index.lock')
-        os.system('find .git/objects/ -size 0 -exec rm -f {} \;')
-        os.system('git fetch origin')
-        os.system('git reset --hard origin/main')
-        os.system('git fetch --all')
+        if (count == 0):
+            os.system('rm -f .git/index.lock')
+            os.system('find .git/objects/ -size 0 -exec rm -f {} \;')
+            os.system('git fetch origin')
+            os.system('git reset --hard origin/main')
+            os.system('git fetch --all')
 
         os.system('git add .')
         os.system('git commit -m "auto push"')
@@ -175,6 +178,8 @@ def main():
         for i in range(0,72):
             # takes 25 seconds
             display_data_on_lcd(tds,light,temp,humid)
+            
+        count = count+1
             
 
 if __name__ == '__main__':
