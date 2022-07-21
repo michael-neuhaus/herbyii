@@ -155,7 +155,9 @@ def main():
         write_json(data)
         convert_json_to_js_file()
         
-        # push all changes to github      
+        # push all changes to github
+        os.system('git reset --hard origin/main')
+        os.system('git fetch --all')
         os.system('git add .')
         os.system('git commit -m "auto push"')
         os.system('git push')
