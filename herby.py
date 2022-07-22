@@ -128,10 +128,9 @@ def convert_json_to_js_file():
 def main():
     
     create_json_file()
+    count = 0
     
     while True:
-        
-        count = 0
         
         # current date and time
         currentDate = date.today()
